@@ -1,0 +1,52 @@
+import { describe, it, vi, expect, beforeEach } from 'vitest'
+
+import { mount, shallowMount } from '@vue/test-utils'
+import { createTestingPinia } from '@pinia/testing'
+import Button from './../Button.vue'
+
+import { setActivePinia, createPinia } from 'pinia'
+import { useCounterStore } from '@/stores/counter'
+
+describe('Button', () => {
+  beforeEach(() => {})
+
+  describe.each([
+    { label: 'Test label', student: { name: 'AAA', age: 19 } },
+    { label: 'Sample lable', student: { name: 'BBB', age: 20 } }
+  ])(`Label $label, expected: $label`, ({ label, student }) => {
+    it('ABC:', () => {
+      const wrapper = shallowMount(Button, {
+        props: {
+          label,
+          student
+        },
+        global: {
+          plugins: [
+            createTestingPinia({
+              createSpy: vi.fn,
+              initialState: {
+                counter: {
+                  count: 0
+                }
+              }
+            })
+          ]
+        }
+      })
+
+      const btns = wrapper.findAll('button')
+      const incrementBtn = btns.find((btn) => btn.text() === 'INCREMENT COUNT')
+
+      console.log('====> test:', {
+        btn0: btns[0].text(),
+        btn1: btns[1].text()
+      })
+
+      // expect(incrementBtn).toBeTruthy()
+
+      // console.log('=====> button:', wrapper.html())
+
+      expect(wrapper.find('button').text()).toContain(label)
+    })
+  })
+})
