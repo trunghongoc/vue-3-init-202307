@@ -11,6 +11,8 @@
   <div>Count: {{ counter.count }}</div>
 
   <AppText :text="'ahihi do ngoc'" />
+
+  <a-button type="primary" @click="fetchTodo">Fetch todos</a-button>
 </template>
 
 <script setup lang="ts">
@@ -20,6 +22,8 @@ import type { IProps } from '@/interface/button';
 import { useCounterStore } from '@/stores/counter'
 import AppText from './AppText.vue'
 
+import { useQuery } from "vue-query"
+import axios from 'axios'
 
 const student123 = ref({
   aname: 'Nguyen Van A',
@@ -41,6 +45,31 @@ const student123 = ref({
 //   setup(props: IProps, context) {
 const props = defineProps<IProps>()
 // const emmit = defineEmits("")
+
+const fetchTodoList = async () => {
+  return axios.get<any>('https://jsonplaceholder.typicode.com/todos').then(res => res.data)
+}
+
+const fetchTodoDetail = async (id: string | number) => {
+  return axios.get<any>('https://jsonplaceholder.typicode.com/todos/' + id).then(res => res.data)
+}
+
+const mockTodoId = 3
+const queryList = useQuery("todos", fetchTodoList, {
+  // enabled: false
+})
+const queryDetail = useQuery(["todos", mockTodoId], () => fetchTodoDetail(mockTodoId), {
+  enabled: false
+})
+
+function fetchTodo() {
+  // console.log('===> Query list', queryList)
+  // queryList.refetch()
+}
+
+watch(queryList.data, () => {
+  console.log("===> queryList:", queryList.data.value)
+})
 
 const counter = useCounterStore()
 

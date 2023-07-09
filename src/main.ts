@@ -3,11 +3,22 @@ import './assets/main.css'
 
 import { createApp, watch } from 'vue'
 import { createPinia } from 'pinia'
+import { VueQueryPlugin } from 'vue-query'
 
 import antd from 'ant-design-vue'
 
 import App from './App.vue'
 import router from './router'
+
+async function initMockServer() {
+  if (process.env.NODE_ENV === 'development') {
+    const { startBrowserMsw } = await import('./mocks/browser')
+
+    startBrowserMsw()
+  }
+}
+
+await initMockServer()
 
 const app = createApp(App)
 
@@ -41,5 +52,6 @@ pinia.use(myPiniaPlugin)
 app.use(pinia)
 app.use(router)
 app.use(antd)
+app.use(VueQueryPlugin)
 
 app.mount('#app')

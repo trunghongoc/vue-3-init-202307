@@ -1,11 +1,12 @@
 <script lang="ts">
 import { defineComponent, onErrorCaptured } from 'vue'
-import { ENV } from '@/config/env'
 
 import Button from './../components/Button.vue';
-import ViewText from './ViewText.vue';
+import ViewText from './ViewText.vue'
 import TestComponent from '@/components/TestComponent.vue';
 import { useCounterStore } from '@/stores/counter'
+import { ENV } from '@/config/env'
+import HelloWorld from '@/components/HelloWorld.vue';
 
 const clickedBtn = (emitted: any) => {
   console.log(emitted)
@@ -18,7 +19,8 @@ export default defineComponent({
   components: {
     Button,
     Text,
-    TestComponent
+    TestComponent,
+    HelloWorld
   },
   props: ['user'],
   data: () => ({
@@ -98,8 +100,7 @@ export default defineComponent({
       </template>
     </Button>
 
-    <a-button type="primary">Primary Button</a-button>
+    <HelloWorld msg="chao cac ban" />
   </main>
 </template>
-
 
