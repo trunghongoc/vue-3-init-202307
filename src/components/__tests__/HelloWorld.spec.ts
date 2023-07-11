@@ -12,3 +12,8 @@ describe('HelloWorld', () => {
     expect(wrapper.text()).toContain('ahihi_dongock_res')
   })
 })
+
+// AC: done
+// requirements
+
+// covergate = 80% 90 100%

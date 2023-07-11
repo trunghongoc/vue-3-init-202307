@@ -2,12 +2,16 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import { useQueryProvider } from "vue-query"
+import DynamicLayout from '@/layout/index.vue'
+import AdminLayout from '@/layout/admin/index.vue'
 
 useQueryProvider()
 </script>
 
 <template>
-  <RouterView />
+  <DynamicLayout>
+    <RouterView />
+  </DynamicLayout>
 </template>
 
 <style scoped lang="scss">

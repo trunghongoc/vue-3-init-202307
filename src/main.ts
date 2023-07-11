@@ -32,11 +32,7 @@ app.provide('ahihi', {
 const pinia = createPinia()
 const piniaLocalstorage = JSON.parse(localStorage.getItem('piniaState') || '{}')
 
-console.log('piniaLocalstorage:', piniaLocalstorage)
-
 export function myPiniaPlugin(context: any) {
-  console.log('==> used context:', context)
-
   watch(
     pinia.state,
     (state) => {

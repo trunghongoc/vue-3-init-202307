@@ -1,0 +1,17 @@
+$header-height: 48px;
+$menu-width-expaned: 256px;
+$menu-width-collapsed: 48px;
+$border-color: #eee;
+$icon-size: 32px;
+$icon-border-radius: 5px;
+
+@mixin buttonIcon($bg: '#eee', $bg-active: '#eee') {
+  width: $icon-size;
+  height: $icon-size;
+  background: $bg;
+  border-radius: $icon-border-radius;
+
+  &.active {
+    background-color: $bg-active;
+  }
+}

@@ -68,18 +68,13 @@ function fetchTodo() {
 }
 
 watch(queryList.data, () => {
-  console.log("===> queryList:", queryList.data.value)
+  // console.log("===> queryList:", queryList)
 })
 
 const counter = useCounterStore()
 
 onUnmounted(() => {
   // ....
-})
-
-console.log({
-  // context,
-  props
 })
 
 const fuser = useUser({ userId: 1, immediate: false })
@@ -110,8 +105,6 @@ watchEffect(() => {
 })
 
 const exampleRef = ref(1)
-console.log("ref: exampleRef", exampleRef)
-console.log("reactive: user", user)
 
 const emit = defineEmits<{
   (e: 'clicked', payload: any): void
@@ -131,9 +124,7 @@ defineExpose({
 // })
 
 const instance = getCurrentInstance()
-console.log("===> current instance:", instance)
 const injected = inject('ahihi')
-console.log('==> injected:', injected)
 
 //     return {
 //       clicked,

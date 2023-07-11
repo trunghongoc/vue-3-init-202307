@@ -12,8 +12,6 @@ const clickedBtn = (emitted: any) => {
   console.log(emitted)
 }
 
-console.log("====> ENV:", ENV)
-
 export default defineComponent({
   name: "HomeView",
   components: {
@@ -100,6 +98,9 @@ export default defineComponent({
       </template>
     </Button>
 
+    <HelloWorld msg="chao cac ban" />
+
+    <div style="height: 1000px; background: #ccc;"></div>
     <HelloWorld msg="chao cac ban" />
   </main>
 </template>

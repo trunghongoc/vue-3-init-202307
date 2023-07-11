@@ -1,5 +1,5 @@
 <template>
-    {{ props.text }}
+    <h1>Text view</h1>
 </template>
 
 
