@@ -12,7 +12,7 @@ const router = createRouter({
       meta: {
         layout: 'AdminLayout'
       },
-      component: HomeView
+      component: () => import('../views/HomeView.vue')
     },
     {
       path: '/about',
