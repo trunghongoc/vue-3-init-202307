@@ -9,6 +9,7 @@ import antd from 'ant-design-vue'
 
 import App from './App.vue'
 import router from './router'
+import '@/scss/index.scss'
 
 async function initMockServer() {
   if (process.env.NODE_ENV === 'development') {

@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <Menu :items="items" :activeKey="activeKey" />
+    <Menu :items="items" :defaultActiveKeys="defaultActiveKeys" />
   </div>
 </template>
 
@@ -22,17 +22,17 @@ const items = ref([
   {
     key: 'home',
     icon: HomeOutlined,
-    label: 'Dashboard Dashboard Dashboard Dashboard Dashboard',
+    label: 'Dashboard',
     expanded: true,
     children: [
-      { key: 'home.1', icon: HomeOutlined, label: 'Dashboard 1' },
-      { key: 'home.2', label: 'Dashboard 2' },
+      { key: 'pie-chart', icon: HomeOutlined, label: 'Pie Chart' },
+      { key: 'stock-chart', label: 'Stock Chart' },
       {
-        key: 'home.3',
+        key: 'column-chart',
         icon: HomeOutlined,
-        label: 'Dashboard 3',
+        label: 'Column chart',
         children: [
-          { key: 'home.3.1', icon: HomeOutlined, label: 'Dashboard 3.1' }
+          { key: 'last-year', icon: HomeOutlined, label: 'Last years' }
         ]
       }
     ]
@@ -42,34 +42,11 @@ const items = ref([
       to: '/about'
     }
   },
-  { key: 'about', icon: HomeOutlined, label: 'About' },
+  { key: 'post', icon: HomeOutlined, label: 'Post' },
   { key: 'settings', icon: HomeOutlined, label: 'Setting' },
-  {
-    key: 'home2',
-    icon: HomeOutlined,
-    label: 'Dashboard 2',
-    expanded: false,
-    children: [
-      {
-        key: 'home.1', icon: HomeOutlined, label: 'Go to About', tagName: 'router-link', props: {
-          to: '/about'
-        }
-      },
-      {
-        key: 'home.1', icon: HomeOutlined, label: 'Go to google', tagName: 'a', props: {
-          href: 'https://google.com',
-          target: '_blank',
-          onClick: (event: any) => {
-            event.preventDefault()
-            alert('ok')
-          }
-        }
-      },
-    ]
-  }
 ])
 
-const activeKey = ref(['home'])
+const defaultActiveKeys = ref(['home'])
 </script>
 
 <style scoped lang="scss">

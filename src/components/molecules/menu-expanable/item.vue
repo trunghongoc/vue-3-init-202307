@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { ref, toRefs, computed, onMounted, defineComponent } from 'vue'
+import { ref, toRefs, computed, onMounted, defineComponent, inject } from 'vue'
 import type { IMenuItem, IMenuItemProps } from './typed'
 
 import { LeftOutlined, RightOutlined, UserOutlined, DownOutlined, UpOutlined } from '@ant-design/icons-vue'
@@ -29,8 +29,9 @@ export default {
     item: {
       type: Object
     },
-    activeKey: {
-      type: [String, Number, Array]
+    defaultActiveKeys: {
+      type: Array,
+      default: () => []
     }
   },
   components: {
@@ -38,26 +39,32 @@ export default {
     UpOutlined
   },
   setup(props: IMenuItemProps) {
-    const { item, activeKey } = toRefs(props)
+    const { item, defaultActiveKeys } = toRefs(props)
 
-    const activeKeys = computed(() => {
-      const keys = Array.isArray(activeKey.value) ? activeKey.value : [activeKey.value]
-
-      return keys
-    })
+    const activeKeys = ref<(string | number)[]>([])
 
     const expanded = ref(false)
+
+    const menuExpanableContext = inject<any>('menuExpanableContext')
 
     const onClickItem = () => {
       if (item.value?.children) {
         expanded.value = !expanded.value
+      }
 
-        return;
+      if (!item.value?.children) {
+        const newActiveKeys: (string | number)[] = []
+        const keys = item.value.key.split('.')
+        while (keys.length) {
+          newActiveKeys.push(keys.join('.'))
+          keys.pop()
+        }
+        menuExpanableContext.activeKeys.value = newActiveKeys
       }
     }
 
     const isActive = computed(() => {
-      return activeKeys.value.includes(item.value.key)
+      return menuExpanableContext.activeKeys.value.includes(item.value.key)
     })
 
     const tagName = computed(() => {
@@ -80,10 +87,11 @@ export default {
 
     onMounted(() => {
       expanded.value = !!item.value.expanded
+      activeKeys.value = [...activeKeys.value, ...defaultActiveKeys.value]
     })
 
     return {
-      item, activeKey, activeKeys, tagName, isActive, onClickItem, expanded, bindingProps
+      item, activeKeys, tagName, isActive, onClickItem, expanded, bindingProps
     }
   }
 }
@@ -92,6 +100,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/scss/variables/color';
+
 .item {
   padding: 8px 0;
   border-radius: 3px;
@@ -99,6 +109,8 @@ export default {
   flex-wrap: wrap;
   cursor: pointer;
   user-select: none;
+  color: $text-black;
+  position: relative;
 
   .label {
     display: flex;
@@ -129,7 +141,17 @@ export default {
   }
 
   &.active {
-    border-left: 3px solid #2980b9;
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: '';
+      width: 3px;
+      height: 100%;
+      background: #2980b9;
+      ;
+    }
+
     background: #eee;
   }
 }

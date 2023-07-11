@@ -12,10 +12,10 @@ export interface IMenuItem {
 
 export interface IMenuProps {
   items: IMenuItem[]
-  activeKey?: string | number | (string | number)[]
+  defaultActiveKeys?: (string | number)[]
 }
 
 export interface IMenuItemProps {
   item: IMenuItem
-  activeKey?: string | number | (string | number)[]
+  defaultActiveKeys?: (string | number)[]
 }
