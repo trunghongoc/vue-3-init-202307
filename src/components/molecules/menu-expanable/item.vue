@@ -1,20 +1,25 @@
 <template>
-  <component :is="tagName" v-bind="item.props" class="item" :class="{ active: isActive }" @click="onClickItem">
-    <div class="left-icon" v-if="item?.icon">
-      <component :is="item.icon" />
+  <a-tooltip :title="isShowFull ? '' : item.label" placement="right">
+    <div class="wrapper" :class="{ 'show-less': !isShowFull }">
+      <component :is="tagName" v-bind="item.props" class="item" :class="{ active: isActive }" @click="onClickItem">
+        <div class="left-icon" v-if="item?.icon">
+          <component :is="item.icon" />
+        </div>
+
+        <div v-show="isShowFull" class="label" :class="{ 'no-icon': !item?.icon }">{{ item.label }}</div>
+
+        <div class="right-icon" v-show="isShowFull && item.children">
+          <UpOutlined v-if="expanded" />
+          <DownOutlined v-else />
+        </div>
+      </component>
+
+      <div class="sub-menu" v-if="item.children" v-show="expanded">
+        <MenuItemExpanable v-for="(childItem, index) of item.children" :key="index" :item="childItem"
+          :isShowFull="isShowFull" />
+      </div>
     </div>
-
-    <div class="label" :class="{ 'no-icon': !item?.icon }">{{ item.label }}</div>
-
-    <div class="right-icon" v-if="item.children">
-      <UpOutlined v-if="expanded" />
-      <DownOutlined v-else />
-    </div>
-  </component>
-
-  <div class="sub-menu" v-if="item.children" v-show="expanded">
-    <MenuItemExpanable v-for="(childItem, index) of item.children" :key="index" :item="childItem" />
-  </div>
+  </a-tooltip>
 </template>
 
 <script lang="ts">
@@ -29,6 +34,9 @@ export default {
     item: {
       type: Object
     },
+    isShowFull: {
+      type: Boolean
+    },
     defaultActiveKeys: {
       type: Array,
       default: () => []
@@ -39,7 +47,7 @@ export default {
     UpOutlined
   },
   setup(props: IMenuItemProps) {
-    const { item, defaultActiveKeys } = toRefs(props)
+    const { item, isShowFull, defaultActiveKeys } = toRefs(props)
 
     const activeKeys = ref<(string | number)[]>([])
 
@@ -91,7 +99,7 @@ export default {
     })
 
     return {
-      item, activeKeys, tagName, isActive, onClickItem, expanded, bindingProps
+      item, isShowFull, activeKeys, tagName, isActive, onClickItem, expanded, bindingProps
     }
   }
 }
@@ -102,62 +110,72 @@ export default {
 <style scoped lang="scss">
 @import '@/scss/variables/color';
 
-.item {
-  padding: 8px 0;
-  border-radius: 3px;
-  display: flex;
-  flex-wrap: wrap;
-  cursor: pointer;
-  user-select: none;
-  color: $text-black;
-  position: relative;
-
-  .label {
+.wrapper {
+  .item {
+    padding: 8px 0;
+    border-radius: 3px;
     display: flex;
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    flex-wrap: wrap;
+    cursor: pointer;
+    user-select: none;
+    color: $text-black;
+    position: relative;
 
-    &.no-icon {
-      padding-left: 8px;
+    .label {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &.no-icon {
+        padding-left: 8px;
+      }
+    }
+
+    .left-icon,
+    .right-icon {
+      width: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 1px;
+    }
+
+    &:hover {
+      background: #eee;
+    }
+
+    &.active {
+      &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: '';
+        width: 3px;
+        height: 100%;
+        background: #2980b9;
+        ;
+      }
+
+      background: #eee;
     }
   }
 
-  .left-icon,
-  .right-icon {
-    width: 32px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .sub-menu {
+    margin-left: 24px;
+    border-radius: 3px;
+
+    &.show-full {}
   }
 
-  &:not(:last-child) {
-    margin-bottom: 1px;
-  }
-
-  &:hover {
-    background: #eee;
-  }
-
-  &.active {
-    &::before {
-      position: absolute;
-      top: 0;
-      left: 0;
-      content: '';
-      width: 3px;
-      height: 100%;
-      background: #2980b9;
-      ;
+  &.show-less {
+    .sub-menu {
+      display: none;
     }
-
-    background: #eee;
   }
-}
-
-.sub-menu {
-  margin-left: 24px;
-  border-radius: 3px;
 }
 </style>

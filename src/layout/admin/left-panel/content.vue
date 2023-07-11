@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <Menu :items="items" :defaultActiveKeys="defaultActiveKeys" />
+    <Menu :items="items" :defaultActiveKeys="defaultActiveKeys" :isShowFull="isExpaned" />
   </div>
 </template>
 
@@ -44,9 +44,30 @@ const items = ref([
   },
   { key: 'post', icon: HomeOutlined, label: 'Post' },
   { key: 'settings', icon: HomeOutlined, label: 'Setting' },
+  {
+    key: 'home2',
+    icon: HomeOutlined,
+    label: 'Dashboard 2',
+    expanded: true,
+    children: [
+      { key: 'pie-chart', icon: HomeOutlined, label: 'Pie Chart' },
+      { key: 'stock-chart', label: 'Stock Chart' },
+      {
+        key: 'column-chart',
+        icon: HomeOutlined,
+        label: 'Column chart',
+        children: [
+          { key: 'last-year', icon: HomeOutlined, label: 'Last years' }
+        ]
+      }
+    ]
+  },
 ])
 
 const defaultActiveKeys = ref(['home'])
+
+const leftPanelStore = useLeftPanelMenuStore()
+const { isExpaned } = toRefs(leftPanelStore)
 </script>
 
 <style scoped lang="scss">

@@ -1,7 +1,7 @@
 <template>
   <div class="menu">
     <MenuItemExpanable v-for="(item, index) of cookedItems" :key="index" :item="item"
-      :defaultActiveKeys="defaultActiveKeys" />
+      :defaultActiveKeys="defaultActiveKeys" :isShowFull="isShowFull" />
   </div>
 </template>
 
@@ -11,7 +11,7 @@ import MenuItemExpanable from './item.vue'
 import type { IMenuItem, IMenuProps } from './typed'
 
 const props = defineProps<IMenuProps>()
-const { items, defaultActiveKeys } = toRefs(props)
+const { items, isShowFull, defaultActiveKeys } = toRefs(props)
 const activeKeys = ref<(string | number)[]>([])
 
 const bindKey = (currentObj: any, parentKey?: string) => {

@@ -13,9 +13,11 @@ export interface IMenuItem {
 export interface IMenuProps {
   items: IMenuItem[]
   defaultActiveKeys?: (string | number)[]
+  isShowFull: boolean
 }
 
 export interface IMenuItemProps {
   item: IMenuItem
+  isShowFull: boolean
   defaultActiveKeys?: (string | number)[]
 }
