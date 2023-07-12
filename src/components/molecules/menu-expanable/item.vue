@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { ref, toRefs, computed, onMounted, defineComponent, inject } from 'vue'
+import { ref, toRefs, computed, onMounted, defineComponent, inject, withDefaults } from 'vue'
 import type { IMenuItem, IMenuItemProps } from './typed'
 
 import { LeftOutlined, RightOutlined, UserOutlined, DownOutlined, UpOutlined } from '@ant-design/icons-vue'
@@ -35,11 +35,16 @@ export default {
       type: Object
     },
     isShowFull: {
-      type: Boolean
+      type: Boolean,
+      default: true,
     },
     defaultActiveKeys: {
       type: Array,
       default: () => []
+    },
+    activeStrategy: {
+      type: String,
+      default: 'active-ancestors'
     }
   },
   components: {
@@ -47,7 +52,7 @@ export default {
     UpOutlined
   },
   setup(props: IMenuItemProps) {
-    const { item, isShowFull, defaultActiveKeys } = toRefs(props)
+    const { item, activeStrategy, defaultActiveKeys } = toRefs(props)
 
     const activeKeys = ref<(string | number)[]>([])
 
@@ -58,9 +63,12 @@ export default {
     const onClickItem = () => {
       if (item.value?.children) {
         expanded.value = !expanded.value
+
+        return
       }
 
-      if (!item.value?.children) {
+      const activeAllAncestors = activeStrategy?.value === 'active-ancestors'
+      if (!item.value?.children && activeAllAncestors) {
         const newActiveKeys: (string | number)[] = []
         const keys = item.value.key.split('.')
         while (keys.length) {
@@ -68,6 +76,13 @@ export default {
           keys.pop()
         }
         menuExpanableContext.activeKeys.value = newActiveKeys
+
+        return
+      }
+
+      if (!item.value?.children && !activeAllAncestors) {
+        menuExpanableContext.activeKeys.value = [item.value.key]
+        return
       }
     }
 

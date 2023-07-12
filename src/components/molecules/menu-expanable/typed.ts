@@ -14,11 +14,13 @@ export interface IMenuItem {
 export interface IMenuProps {
   items: IMenuItem[]
   defaultActiveKeys?: string[]
-  isShowFull: boolean
+  isShowFull?: boolean
+  activeStrategy?: 'active-ancestors' | 'only-current-item'
 }
 
 export interface IMenuItemProps {
   item: IMenuItem
   isShowFull: boolean
   defaultActiveKeys?: string[]
+  activeStrategy?: IMenuProps['activeStrategy']
 }

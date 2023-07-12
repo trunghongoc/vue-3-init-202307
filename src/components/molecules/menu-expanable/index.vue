@@ -11,8 +11,22 @@ import MenuItemExpanable from './item.vue'
 import type { IMenuItem, IMenuProps } from './typed'
 import { loopToCookItems } from './helper'
 
-const props = defineProps<IMenuProps>()
-const { items, isShowFull, defaultActiveKeys } = toRefs(props)
+defineOptions({
+  name: 'AhihiDoNgock',
+  inheritAttrs: false,
+  customOptions: {}
+})
+
+const props = withDefaults(defineProps<IMenuProps>(), {
+  isShowFull: true,
+  activeStrategy: 'active-ancestors'
+})
+const { items, isShowFull, activeStrategy, defaultActiveKeys } = toRefs(props)
+
+console.log("=====>activeStrategy", {
+  isShowFull,
+  activeStrategy
+})
 const activeKeys = ref<(string | number)[]>([])
 
 const cookedItems = computed(() => {
