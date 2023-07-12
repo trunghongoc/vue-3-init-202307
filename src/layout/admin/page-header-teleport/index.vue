@@ -18,7 +18,7 @@ defineOptions({
 const targetEle = ref<string>('#layout-admin-page-header-right-teleport-area')
 const isExistTeleportTarget = ref<boolean>(false)
 const times = ref<number>(0)
-const maxTimes: number = 3
+const maxTimes: number = 10
 
 const tryToCreateTeleport = () => {
   let ele = document.querySelector(targetEle.value)
