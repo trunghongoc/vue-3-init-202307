@@ -4,7 +4,7 @@
       <component :is="tagName" v-bind="item.props" class="item"
         :class="{ active: isActive, 'has-children': item.children }" @click="onClickItem">
         <div class="left-icon" v-if="item?.icon">
-          <component :is="item.icon" />
+          <component :is="item.icon"></component>
         </div>
 
         <div v-show="isShowFull" class="label" :class="{ 'no-icon': !item?.icon }">{{ item.label }}</div>
@@ -23,107 +23,85 @@
   </a-tooltip>
 </template>
 
-<script lang="ts">
-import { ref, toRefs, computed, onMounted, defineComponent, inject, withDefaults } from 'vue'
+<script setup lang="ts">
+import { ref, toRefs, computed, onMounted, defineComponent, inject } from 'vue'
 import type { IMenuItem, IMenuItemProps } from './typed'
 
 import { LeftOutlined, RightOutlined, UserOutlined, DownOutlined, UpOutlined } from '@ant-design/icons-vue'
 
-export default {
-  name: 'MenuItemExpanable',
-  props: {
-    item: {
-      type: Object
-    },
-    isShowFull: {
-      type: Boolean,
-      default: true,
-    },
-    defaultActiveKeys: {
-      type: Array,
-      default: () => []
-    },
-    activeStrategy: {
-      type: String,
-      default: 'active-ancestors'
+defineOptions({
+  name: 'MenuItemExpanable'
+})
+
+const props = withDefaults(defineProps<IMenuItemProps>(), {
+  isShowFull: true,
+  defaultActiveKeys: () => [],
+  activeStrategy: 'active-ancestors'
+})
+
+const { item, isShowFull, activeStrategy, defaultActiveKeys } = toRefs(props)
+
+const activeKeys = ref<(string | number)[]>([])
+
+const expanded = ref(false)
+
+const menuExpanableContext = inject<any>('menuExpanableContext')
+
+const onClickItem = () => {
+  if (item.value?.children) {
+    expanded.value = !expanded.value
+
+    return
+  }
+
+  menuExpanableContext.activeKey.value = item.value.key
+  const activeAllAncestors = activeStrategy?.value === 'active-ancestors'
+
+  if (!item.value?.children && activeAllAncestors) {
+    const newActiveKeys: (string | number)[] = []
+    const keys = item.value.key.split('.')
+    while (keys.length) {
+      newActiveKeys.push(keys.join('.'))
+      keys.pop()
     }
-  },
-  components: {
-    DownOutlined,
-    UpOutlined
-  },
-  setup(props: IMenuItemProps) {
-    const { item, activeStrategy, defaultActiveKeys } = toRefs(props)
+    menuExpanableContext.activeKeys.value = newActiveKeys
 
-    const activeKeys = ref<(string | number)[]>([])
+    return
+  }
 
-    const expanded = ref(false)
-
-    const menuExpanableContext = inject<any>('menuExpanableContext')
-
-    const onClickItem = () => {
-      if (item.value?.children) {
-        expanded.value = !expanded.value
-
-        return
-      }
-
-      menuExpanableContext.activeKey.value = item.value.key
-      const activeAllAncestors = activeStrategy?.value === 'active-ancestors'
-
-      if (!item.value?.children && activeAllAncestors) {
-        const newActiveKeys: (string | number)[] = []
-        const keys = item.value.key.split('.')
-        while (keys.length) {
-          newActiveKeys.push(keys.join('.'))
-          keys.pop()
-        }
-        menuExpanableContext.activeKeys.value = newActiveKeys
-
-        return
-      }
-
-      if (!item.value?.children && !activeAllAncestors) {
-        menuExpanableContext.activeKeys.value = [item.value.key]
-        return
-      }
-    }
-
-    const isActive = computed(() => {
-      return menuExpanableContext.activeKeys.value.includes(item.value.key)
-    })
-
-    const tagName = computed(() => {
-      if (item.value?.tagName) {
-        return item.value.tagName
-      }
-
-      return 'div'
-    })
-
-    const bindingProps = computed(() => {
-      if (item.value.children) {
-        return item.value
-      }
-
-
-      const { onClick, ...rest } = item.value?.props || {}
-      return rest
-    })
-
-    onMounted(() => {
-      expanded.value = !!item.value.expanded
-      const _defaultActiveKeys = defaultActiveKeys?.value || []
-      activeKeys.value = [...activeKeys.value, ..._defaultActiveKeys]
-    })
-
-    return {
-      activeKeys, tagName, isActive, onClickItem, expanded, bindingProps
-    }
+  if (!item.value?.children && !activeAllAncestors) {
+    menuExpanableContext.activeKeys.value = [item.value.key]
+    return
   }
 }
 
-// const props = defineProps<IMenuItem>()
+const isActive = computed(() => {
+  return menuExpanableContext.activeKeys.value.includes(item.value.key)
+})
+
+const tagName = computed(() => {
+  if (item.value?.tagName) {
+    return item.value.tagName
+  }
+
+  return 'div'
+})
+
+const bindingProps = computed(() => {
+  if (item.value.children) {
+    return item.value
+  }
+
+
+  const { onClick, ...rest } = item.value?.props || {}
+  return rest
+})
+
+onMounted(() => {
+  expanded.value = !!item.value.expanded
+  const _defaultActiveKeys = defaultActiveKeys?.value || []
+  activeKeys.value = [...activeKeys.value, ..._defaultActiveKeys]
+})
 </script>
 
 <style scoped lang="scss">
