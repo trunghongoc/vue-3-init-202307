@@ -95,11 +95,12 @@ export default {
 
     onMounted(() => {
       expanded.value = !!item.value.expanded
-      activeKeys.value = [...activeKeys.value, ...defaultActiveKeys.value]
+      const _defaultActiveKeys = defaultActiveKeys?.value || []
+      activeKeys.value = [...activeKeys.value, ..._defaultActiveKeys]
     })
 
     return {
-      item, isShowFull, activeKeys, tagName, isActive, onClickItem, expanded, bindingProps
+      activeKeys, tagName, isActive, onClickItem, expanded, bindingProps
     }
   }
 }

@@ -9,31 +9,16 @@
 import { computed, toRefs, provide, onMounted, ref, watch } from 'vue'
 import MenuItemExpanable from './item.vue'
 import type { IMenuItem, IMenuProps } from './typed'
+import { loopToCookItems } from './helper'
 
 const props = defineProps<IMenuProps>()
 const { items, isShowFull, defaultActiveKeys } = toRefs(props)
 const activeKeys = ref<(string | number)[]>([])
 
-const bindKey = (currentObj: any, parentKey?: string) => {
-  currentObj.key = parentKey ? `${parentKey}.${currentObj.key}` : currentObj.key
-
-  return currentObj.key
-}
-
-const loop = (list: any[], parentKey?: string) => {
-  list.forEach(element => {
-    const key = bindKey(element, parentKey)
-
-    if (element.children?.length) {
-      loop(element.children, key)
-    }
-  })
-}
-
 const cookedItems = computed(() => {
   const cooked: any[] = items.value
 
-  loop(cooked)
+  loopToCookItems(cooked)
 
   return cooked
 })
