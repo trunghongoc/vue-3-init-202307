@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import type { IPageHeaderProps } from './typed'
 
 defineOptions({
@@ -41,11 +41,16 @@ const tryToCreateTeleport = () => {
       clearInterval(interval)
     }
   }, 200)
+
+  onBeforeUnmount(() => {
+    clearInterval(interval)
+  })
 }
 
 onMounted(() => {
   tryToCreateTeleport()
 })
+
 </script>
 
 <style scoped lang="scss"></style>
