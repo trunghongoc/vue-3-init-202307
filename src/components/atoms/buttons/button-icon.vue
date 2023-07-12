@@ -36,17 +36,17 @@ const value = computed(() => ({
   user-select: none;
   padding: 8px;
 
-  .sm {
+  &.sm {
     min-width: 32px;
     height: 32px;
   }
 
-  .md {
+  &.md {
     min-width: 42px;
     height: 42px;
   }
 
-  .lg {
+  &.lg {
     min-width: 50px;
     height: 50px;
   }

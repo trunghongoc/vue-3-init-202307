@@ -10,7 +10,8 @@ const router = createRouter({
       path: '/',
       name: 'home',
       meta: {
-        layout: 'AdminLayout'
+        layout: 'AdminLayout',
+        title: 'Dashboard'
       },
       component: () => import('../views/HomeView.vue')
     },
@@ -18,7 +19,8 @@ const router = createRouter({
       path: '/about',
       name: 'about',
       meta: {
-        layout: 'AdminLayout'
+        layout: 'AdminLayout',
+        title: 'About'
       },
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
@@ -31,7 +33,8 @@ const router = createRouter({
       path: '/text',
       name: 'text',
       meta: {
-        layout: 'BlankLayout'
+        layout: 'BlankLayout',
+        title: 'Text'
       },
       component: () => import('../views/ViewText.vue')
     }

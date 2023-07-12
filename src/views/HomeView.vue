@@ -7,6 +7,7 @@ import TestComponent from '@/components/TestComponent.vue';
 import { useCounterStore } from '@/stores/counter'
 import { ENV } from '@/config/env'
 import HelloWorld from '@/components/HelloWorld.vue';
+import PageHeaderTeleport from '@/layout/admin/page-header-teleport/index.vue'
 
 const clickedBtn = (emitted: any) => {
   console.log(emitted)
@@ -18,7 +19,8 @@ export default defineComponent({
     Button,
     Text,
     TestComponent,
-    HelloWorld
+    HelloWorld,
+    PageHeaderTeleport
   },
   props: ['user'],
   data: () => ({
@@ -88,6 +90,12 @@ export default defineComponent({
 
 <template>
   <main>
+    <PageHeaderTeleport>
+      <a-row justify="end">
+        <a-button type="dashed" @click="counter.increment()">INCREMENT COUNT</a-button>
+      </a-row>
+    </PageHeaderTeleport>
+
     home page: <button @click="counter.increment()">INCREMENT COUNT</button>
     <button @click="logRef">GET REF</button>
     <button @click="changeLabel">CHANGE LABEL</button>
