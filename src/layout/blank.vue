@@ -2,7 +2,7 @@
   <div class="template">
     <NavLinkTest />
 
-    <Suspense timeout="300">
+    <Suspense timeout="0">
       <template #default>
         <router-view />
       </template>
@@ -10,7 +10,6 @@
       <template #fallback>
         <div>
           Loading...
-          <div style="width: 2000px; height: 2000px; background: green;"></div>
         </div>
       </template>
     </Suspense>

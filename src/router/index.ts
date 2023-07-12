@@ -1,3 +1,4 @@
+import { defineAsyncComponent } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import AdminLayout from '@/layout/admin/index.vue'
 import BlankLayout from '@/layout/blank.vue'
@@ -18,7 +19,7 @@ const router = createRouter({
             layout: 'AdminLayout',
             title: 'Dashboard'
           },
-          component: () => import('../views/HomeView.vue')
+          component: defineAsyncComponent(() => import('@/views/HomeView.vue'))
         },
         {
           path: 'about',
@@ -30,7 +31,9 @@ const router = createRouter({
           // route level code-splitting
           // this generates a separate chunk (About.[hash].js) for this route
           // which is lazy-loaded when the route is visited.
-          component: () => import('../views/AboutView.vue'),
+          component: defineAsyncComponent(
+            () => import('@/views/AboutView.vue')
+          ),
           beforeEnter() {},
           sensitive: true
         }
@@ -47,7 +50,7 @@ const router = createRouter({
             layout: 'BlankLayout',
             title: 'Text'
           },
-          component: () => import('../views/ViewText.vue')
+          component: defineAsyncComponent(() => import('@/views/ViewText.vue'))
         }
       ]
     }
