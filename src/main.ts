@@ -11,15 +11,15 @@ import App from './App.vue'
 import router from './router'
 import '@/scss/index.scss'
 
-async function initMockServer() {
+function initMockServer() {
   if (process.env.NODE_ENV === 'development') {
-    const { startBrowserMsw } = await import('./mocks/browser')
-
-    startBrowserMsw()
+    import('./mocks/browser').then(({ startBrowserMsw }) => {
+      startBrowserMsw()
+    })
   }
 }
 
-await initMockServer()
+initMockServer()
 
 const app = createApp(App)
 

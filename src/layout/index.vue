@@ -22,7 +22,7 @@ export default {
   },
   setup() {
     const routerStore = useRouterStore()
-    const { currentRoute } = storeToRefs(routerStore)
+    const { currentRoute } = storeToRefs<any>(routerStore)
 
     const layout = computed(() => {
       return currentRoute?.value?.meta?.layout || 'AdminLayout'

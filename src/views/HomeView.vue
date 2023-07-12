@@ -15,7 +15,7 @@ const clickedBtn = (emitted: any) => {
 export default defineComponent({
   name: "HomeView",
   components: {
-    Button,
+    'p-button': Button,
     HelloWorld,
     PageHeaderTeleport
   },
@@ -97,11 +97,11 @@ export default defineComponent({
     <button @click="logRef">GET REF</button>
     <button @click="changeLabel">CHANGE LABEL</button>
 
-    <Button ref="abc" :label="label" :student="student" @clicked="clickedBtn">
+    <p-button ref="abc" :label="label" :student="student" @clicked="clickedBtn">
       <template v-slot:ahihi>
         yeah slot ahihi
       </template>
-    </Button>
+    </p-button>
 
     <HelloWorld msg="chao cac ban" />
 
