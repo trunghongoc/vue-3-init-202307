@@ -18,11 +18,27 @@
           </template>
 
           <template #fallback>
-            <div>
+            <div style="width: 2000px; height: 2000px; background: red;">
               Loading...
             </div>
           </template>
         </Suspense>
+
+        <!-- <RouterView v-slot="{ Component }">
+          <template v-if="Component">
+            <Transition mode="out-in">
+              <KeepAlive>
+                <Suspense>
+                  <component :is="Component"></component>
+
+                  <template #fallback>
+                    Loading...
+                  </template>
+                </Suspense>
+              </KeepAlive>
+            </Transition>
+          </template>
+        </RouterView> -->
 
         <!-- <RouterView name="default" v-slot="{ Component, route }">
           <transition :name="route.meta.transition" mode="out-in" :duration="300" :key="route.path">
