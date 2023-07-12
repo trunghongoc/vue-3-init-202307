@@ -72,6 +72,113 @@ const items = ref([
       }
     ]
   },
+  {
+    key: 'home3',
+    icon: HomeOutlined,
+    label: 'Dashboard 3',
+    expanded: false,
+    children: [
+      { key: 'pie-chart', icon: HomeOutlined, label: 'Pie Chart' },
+      { key: 'stock-chart', label: 'Stock Chart' },
+      {
+        key: 'column-chart',
+        icon: HomeOutlined,
+        label: 'Column chart',
+        children: [
+          { key: 'last-year', icon: HomeOutlined, label: 'Last years' }
+        ]
+      }
+    ]
+  },
+  {
+    key: 'home4',
+    icon: HomeOutlined,
+    label: 'Dashboard 4',
+    children: [
+      { key: 'pie-chart', icon: HomeOutlined, label: 'Pie Chart' },
+      { key: 'stock-chart', label: 'Stock Chart' },
+      {
+        key: 'column-chart',
+        icon: HomeOutlined,
+        label: 'Column chart',
+        children: [
+          { key: 'last-year', icon: HomeOutlined, label: 'Last years' }
+        ]
+      }
+    ]
+  },
+  {
+    key: 'home5',
+    icon: HomeOutlined,
+    label: 'Dashboard 5',
+    expanded: true,
+    children: [
+      { key: 'pie-chart', icon: HomeOutlined, label: 'Pie Chart' },
+      { key: 'stock-chart', label: 'Stock Chart' },
+      {
+        key: 'column-chart',
+        icon: HomeOutlined,
+        label: 'Column chart',
+        children: [
+          { key: 'last-year', icon: HomeOutlined, label: 'Last years' }
+        ]
+      }
+    ]
+  },
+  {
+    key: 'home6',
+    icon: HomeOutlined,
+    label: 'Dashboard 6',
+    expanded: true,
+    children: [
+      { key: 'pie-chart', icon: HomeOutlined, label: 'Pie Chart' },
+      { key: 'stock-chart', label: 'Stock Chart' },
+      {
+        key: 'column-chart',
+        icon: HomeOutlined,
+        label: 'Column chart',
+        children: [
+          { key: 'last-year', icon: HomeOutlined, label: 'Last years' }
+        ]
+      }
+    ]
+  },
+  {
+    key: 'home7',
+    icon: HomeOutlined,
+    label: 'Dashboard 7',
+    expanded: true,
+    children: [
+      { key: 'pie-chart', icon: HomeOutlined, label: 'Pie Chart' },
+      { key: 'stock-chart', label: 'Stock Chart' },
+      {
+        key: 'column-chart',
+        icon: HomeOutlined,
+        label: 'Column chart',
+        children: [
+          { key: 'last-year', icon: HomeOutlined, label: 'Last years' }
+        ]
+      }
+    ]
+  },
+  {
+    key: 'home8',
+    icon: HomeOutlined,
+    label: 'Dashboard 8',
+    expanded: true,
+    children: [
+      { key: 'pie-chart', icon: HomeOutlined, label: 'Pie Chart' },
+      { key: 'stock-chart', label: 'Stock Chart' },
+      {
+        key: 'column-chart',
+        icon: HomeOutlined,
+        label: 'Column chart',
+        children: [
+          { key: 'last-year', icon: HomeOutlined, label: 'Last years' }
+        ]
+      }
+    ]
+  },
 ])
 
 const defaultActiveKeys = ref(['home'])
