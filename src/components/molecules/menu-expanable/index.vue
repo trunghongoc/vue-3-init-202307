@@ -28,6 +28,7 @@ console.log("=====>activeStrategy", {
   activeStrategy
 })
 const activeKeys = ref<(string | number)[]>([])
+const activeKey = ref<string | null>(null)
 
 const cookedItems = computed(() => {
   const cooked: any[] = items.value
@@ -47,8 +48,10 @@ onMounted(() => {
 
 provide('menuExpanableContext', {
   items,
+  cookedItems,
   defaultActiveKeys,
-  activeKeys
+  activeKeys,
+  activeKey
 })
 </script>
 

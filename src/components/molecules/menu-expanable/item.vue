@@ -1,7 +1,8 @@
 <template>
   <a-tooltip :title="isShowFull ? '' : item.label" placement="right">
     <div class="wrapper" :class="{ 'show-less': !isShowFull }">
-      <component :is="tagName" v-bind="item.props" class="item" :class="{ active: isActive }" @click="onClickItem">
+      <component :is="tagName" v-bind="item.props" class="item"
+        :class="{ active: isActive, 'has-children': item.children }" @click="onClickItem">
         <div class="left-icon" v-if="item?.icon">
           <component :is="item.icon" />
         </div>
@@ -67,7 +68,9 @@ export default {
         return
       }
 
+      menuExpanableContext.activeKey.value = item.value.key
       const activeAllAncestors = activeStrategy?.value === 'active-ancestors'
+
       if (!item.value?.children && activeAllAncestors) {
         const newActiveKeys: (string | number)[] = []
         const keys = item.value.key.split('.')
@@ -174,10 +177,15 @@ export default {
         width: 3px;
         height: 100%;
         background: #2980b9;
-        ;
       }
 
       background: #eee;
+
+      &.has-children {
+        &::before {
+          background: #ddd;
+        }
+      }
     }
   }
 
