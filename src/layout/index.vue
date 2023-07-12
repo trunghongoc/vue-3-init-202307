@@ -6,34 +6,29 @@
   </div>
 </template>
 
-<script lang="ts">
-import { computed, ref, shallowRef, watch, toRefs } from 'vue'
+<script setup lang="ts">
+import { computed, ref, shallowRef, watch, toRefs, defineComponent } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRouterStore } from '@/stores/router'
 import AdminLayout from './admin/index.vue'
 import BlankLayout from './blank.vue'
 import { useRoute } from 'vue-router'
 
-export default {
+defineOptions({
   name: 'DynamicLayout',
   components: {
     AdminLayout,
     BlankLayout
-  },
-  setup() {
-    const routerStore = useRouterStore()
-    const { currentRoute } = storeToRefs<any>(routerStore)
-
-    const layout = computed(() => {
-      return currentRoute?.value?.meta?.layout || 'AdminLayout'
-    })
-
-    return {
-      layout,
-      currentRoute
-    }
   }
-}
+})
+
+const route = useRoute()
+
+const routerStore = useRouterStore()
+
+const layout = computed(() => {
+  return route?.meta?.layout || 'AdminLayout'
+})
 </script>
 
 <style scoped lang="scss">
