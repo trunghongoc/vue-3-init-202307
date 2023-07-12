@@ -100,7 +100,9 @@ export default defineComponent({
 
     <HelloWorld msg="chao cac ban" />
 
-    <div style="height: 1000px; background: #ccc;"></div>
+    <div style="height: 1000px;">
+      scroll down to see all page content
+    </div>
     <HelloWorld msg="chao cac ban" />
   </main>
 </template>
