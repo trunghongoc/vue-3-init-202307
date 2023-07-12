@@ -4,7 +4,7 @@
       <component :is="tagName" v-bind="item.props" class="item"
         :class="{ active: isActive, 'has-children': item.children }" @click="onClickItem">
         <div class="left-icon" v-if="item?.icon">
-          <component :is="item.icon"></component>
+          <component :is="item.icon" />
         </div>
 
         <div v-show="isShowFull" class="label" :class="{ 'no-icon': !item?.icon }">{{ item.label }}</div>
@@ -25,6 +25,7 @@
 
 <script setup lang="ts">
 import { ref, toRefs, computed, onMounted, defineComponent, inject } from 'vue'
+import type { VueElement } from 'vue'
 import type { IMenuItem, IMenuItemProps } from './typed'
 
 import { LeftOutlined, RightOutlined, UserOutlined, DownOutlined, UpOutlined } from '@ant-design/icons-vue'

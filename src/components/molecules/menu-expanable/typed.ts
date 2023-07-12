@@ -2,7 +2,7 @@ import type { VueElement } from 'vue'
 
 export interface IMenuItem {
   key: string
-  icon?: VueElement
+  icon?: any
   label?: string
   expanded?: boolean
   onClick?: () => void

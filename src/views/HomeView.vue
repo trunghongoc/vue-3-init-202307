@@ -3,7 +3,6 @@ import { defineComponent, onErrorCaptured } from 'vue'
 
 import Button from './../components/Button.vue';
 import ViewText from './ViewText.vue'
-import TestComponent from '@/components/TestComponent.vue';
 import { useCounterStore } from '@/stores/counter'
 import { ENV } from '@/config/env'
 import HelloWorld from '@/components/HelloWorld.vue';
@@ -17,8 +16,6 @@ export default defineComponent({
   name: "HomeView",
   components: {
     Button,
-    Text,
-    TestComponent,
     HelloWorld,
     PageHeaderTeleport
   },
