@@ -11,13 +11,36 @@
     <div class="body" :class="{ 'menu-expaned': isExpaned }">
       <div class="body-layout">
         <NavLinkTest />
-        <Suspense>
-          <slot />
+
+        <Suspense timeout="300">
+          <template #default>
+            <router-view />
+          </template>
 
           <template #fallback>
-            Loading...
+            <div>
+              Loading...
+              <div style="width: 2000px; height: 2000px; background: red;"></div>
+            </div>
           </template>
         </Suspense>
+
+        <!-- <RouterView name="default" v-slot="{ Component, route }">
+          <transition :name="route.meta.transition" mode="out-in" :duration="300" :key="route.path">
+            <Suspense>
+              <template #default>
+                <component :is="Component" :key="route.path" />
+              </template>
+
+              <template #fallback>
+                <div>
+                  Loading...
+                  <div style="width: 2000px; height: 2000px; background: red;"></div>
+                </div>
+              </template>
+            </Suspense>
+          </transition>
+        </RouterView> -->
       </div>
     </div>
   </div>
