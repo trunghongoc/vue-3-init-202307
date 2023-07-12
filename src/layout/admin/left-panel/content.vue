@@ -38,8 +38,18 @@ const items = ref([
     ]
   },
   {
+    key: 'home', icon: HomeOutlined, label: 'Home', tagName: 'router-link', props: {
+      to: '/'
+    }
+  },
+  {
     key: 'about', icon: HomeOutlined, label: 'About', tagName: 'router-link', props: {
       to: '/about'
+    }
+  },
+  {
+    key: 'text', icon: HomeOutlined, label: 'Text', tagName: 'router-link', props: {
+      to: '/text'
     }
   },
   { key: 'post', icon: HomeOutlined, label: 'Post' },
