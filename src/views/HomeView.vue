@@ -36,7 +36,7 @@ import PageHeaderTeleport from '@/layout/admin/page-header-teleport/index.vue'
 
 
 const counter = useCounterStore()
-const label = ref<string>('')
+const label = ref<string>('Chao be le dan dat )))')
 const student = ref<any>({
   name: 'Nguyen Van A',
   age: 20
@@ -55,7 +55,7 @@ const clickedBtn = (emitted: any) => {
 }
 
 const changeLabel = () => {
-  label.value = 'New label'
+  label.value = 'Bé lê dăn đạt đã bị changed )))'
 }
 
 const logRef = (value: any) => {
