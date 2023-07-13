@@ -23,10 +23,6 @@ const props = withDefaults(defineProps<IMenuProps>(), {
 })
 const { items, isShowFull, activeStrategy, defaultActiveKeys } = toRefs(props)
 
-console.log("=====>activeStrategy", {
-  isShowFull,
-  activeStrategy
-})
 const activeKeys = ref<(string | number)[]>([])
 const activeKey = ref<string | null>(null)
 
