@@ -18,9 +18,7 @@
           </template>
 
           <template #fallback>
-            <div style="width: 2000px; height: 2000px; background: yellow;">
-              Loading...
-            </div>
+            <a-spin />
           </template>
         </Suspense>
 
