@@ -6,6 +6,7 @@
       </a-row>
     </PageHeaderTeleport>
 
+    <!-- <template v-for="(item, index) of Array(1000).fill(1)" :key="index"> -->
     home page: <button @click="counter.increment()">INCREMENT COUNT</button>
     <button @click="logRef">GET REF</button>
     <button @click="changeLabel">CHANGE LABEL</button>
@@ -22,11 +23,12 @@
       scroll down to see all page content
     </div>
     <HelloWorld msg="chao cac ban" />
+    <!-- </template> -->
   </main>
 </template>
 
 <script setup lang="ts">
-import { ref, onErrorCaptured, computed } from 'vue'
+import { ref, onErrorCaptured, computed, defineAsyncComponent } from 'vue'
 
 import Button from './../components/Button.vue';
 import { useCounterStore } from '@/stores/counter'

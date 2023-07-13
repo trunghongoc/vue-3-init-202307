@@ -3,8 +3,12 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AdminLayout from '@/layout/admin/index.vue'
 import BlankLayout from '@/layout/blank.vue'
 
+import { Spin } from 'ant-design-vue'
+
 import { useRouterStore } from '@/stores/router'
-import { lazy } from '@/utils/lazyLoadComponent'
+// import { lazy } from '@/utils/lazyLoadComponent'
+
+const lazy = (callback: any) => defineAsyncComponent(callback)
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
