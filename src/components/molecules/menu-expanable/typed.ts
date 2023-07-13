@@ -1,7 +1,7 @@
 import type { IAIconKeybabProps } from '@/components/atoms/icons/ga-icon/typed'
 
 export interface IMenuItem {
-  key: string
+  name: string
   icon?: IAIconKeybabProps
   label?: string
   expanded?: boolean
@@ -9,6 +9,11 @@ export interface IMenuItem {
   tagName?: string
   props?: any
   children?: IMenuItem[]
+}
+
+export interface IMenuItemCooked extends Omit<IMenuItem, 'children'> {
+  parentNames: string[]
+  children?: IMenuItemCooked[]
 }
 
 export interface IMenuProps {
@@ -19,7 +24,7 @@ export interface IMenuProps {
 }
 
 export interface IMenuItemProps {
-  item: IMenuItem
+  item: IMenuItemCooked
   isShowFull: boolean
   defaultActiveKeys?: string[]
   activeStrategy?: IMenuProps['activeStrategy']

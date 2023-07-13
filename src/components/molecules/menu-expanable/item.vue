@@ -55,29 +55,22 @@ const onClickItem = () => {
     return
   }
 
-  menuExpanableContext.activeKey.value = item.value.key
+  menuExpanableContext.activeKey.value = item.value.name
   const activeAllAncestors = activeStrategy?.value === 'active-ancestors'
 
   if (!item.value?.children && activeAllAncestors) {
-    const newActiveKeys: (string | number)[] = []
-    const keys = item.value.key.split('.')
-    while (keys.length) {
-      newActiveKeys.push(keys.join('.'))
-      keys.pop()
-    }
-    menuExpanableContext.activeKeys.value = newActiveKeys
-
+    menuExpanableContext.activeKeys.value = [...item.value.parentNames, item.value.name]
     return
   }
 
   if (!item.value?.children && !activeAllAncestors) {
-    menuExpanableContext.activeKeys.value = [item.value.key]
+    menuExpanableContext.activeKeys.value = [item.value.name]
     return
   }
 }
 
 const isActive = computed(() => {
-  return menuExpanableContext.activeKeys.value.includes(item.value.key)
+  return menuExpanableContext.activeKeys.value.includes(item.value.name)
 })
 
 const tagName = computed(() => {

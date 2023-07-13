@@ -2,20 +2,48 @@ import { ref } from 'vue'
 import axios from 'axios'
 import { useQuery } from 'vue-query'
 
-export const bindKey = (currentObj: any, parentKey?: string) => {
-  currentObj.key = parentKey ? `${parentKey}.${currentObj.key}` : currentObj.key
+import type { IMenuItem, IMenuItemCooked } from './typed'
 
-  return currentObj.key
+export const bindParentNames = (
+  item: IMenuItem,
+  parentNames: string[]
+): string[] => {
+  ;(item as IMenuItemCooked).parentNames = [...parentNames, item.name]
+
+  return (item as IMenuItemCooked).parentNames
 }
 
-export const loopToCookItems = (list: any[], parentKey?: string) => {
-  list.forEach((element) => {
-    const key = bindKey(element, parentKey)
+export const loopBindParentNames = (
+  items: IMenuItem[],
+  parentNames: string[]
+) => {
+  items.forEach((item: IMenuItem) => {
+    const names: string[] = bindParentNames(item, parentNames)
 
-    if (element.children?.length) {
-      loopToCookItems(element.children, key)
+    if (item.children?.length) {
+      loopBindParentNames(item.children, names)
     }
   })
+}
+
+export const findByName = (
+  items: IMenuItemCooked[],
+  name: string
+): IMenuItemCooked | null => {
+  for (const item of items) {
+    if (item.name === name) {
+      return item
+    }
+
+    if (item.children) {
+      const result = findByName(item.children, name)
+      if (result) {
+        return result
+      }
+    }
+  }
+
+  return null
 }
 
 export function useCounter() {

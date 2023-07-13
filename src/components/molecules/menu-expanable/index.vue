@@ -6,10 +6,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, toRefs, provide, onMounted, ref, watch } from 'vue'
+import { computed, toRefs, provide, onMounted, ref, watch, toRaw } from 'vue'
+import { useRoute } from 'vue-router'
 import MenuItemExpanable from './item.vue'
-import type { IMenuItem, IMenuProps } from './typed'
-import { loopToCookItems } from './helper'
+import type { IMenuItem, IMenuProps, IMenuItemCooked } from './typed'
+import { findByName, loopBindParentNames } from './helper'
 
 defineOptions({
   name: 'MenuExpanable',
@@ -17,29 +18,41 @@ defineOptions({
   customOptions: {}
 })
 
+const route = useRoute()
+
 const props = withDefaults(defineProps<IMenuProps>(), {
   isShowFull: true,
-  activeStrategy: 'active-ancestors'
+  activeStrategy: 'active-ancestors',
+  defaultActiveKeys: () => []
 })
 const { items, isShowFull, activeStrategy, defaultActiveKeys } = toRefs(props)
 
 const activeKeys = ref<(string | number)[]>([])
 const activeKey = ref<string | null>(null)
 
-const cookedItems = computed(() => {
-  const cooked: any[] = items.value
-
-  loopToCookItems(cooked)
-
-  return cooked
+const cookedItems = computed((): IMenuItemCooked[] => {
+  const cooked: IMenuItem[] = items.value
+  loopBindParentNames(cooked, [])
+  return cooked as IMenuItemCooked[]
 })
+
+const getDefaultActiveKeys = () => {
+  const pageName: string = route.name as string;
+  if (pageName) {
+    const item: IMenuItemCooked | null = findByName(cookedItems.value, pageName)
+
+    if (item) {
+      activeKeys.value = [...defaultActiveKeys.value, ...item.parentNames, item.name]
+    }
+  }
+}
 
 watch(cookedItems, () => {
   console.log(cookedItems)
 })
 
 onMounted(() => {
-  activeKeys.value = defaultActiveKeys?.value || []
+  getDefaultActiveKeys()
 })
 
 provide('menuExpanableContext', {

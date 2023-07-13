@@ -5,48 +5,51 @@
 </template>
 
 <script setup lang="ts">
-import { defineComponent, ref, watch, toRefs } from 'vue'
+import { defineComponent, ref, watch, toRefs, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { useLeftPanelMenuStore } from '@/stores/leftPanelMenu'
 import Menu from '@/components/molecules/menu-expanable/index.vue'
 import type { IMenuItem } from '@/components/molecules/menu-expanable/typed'
 
+const route = useRoute()
+
 const items = ref<IMenuItem[]>([
   {
-    key: 'dashboard', icon: { name: 'home-outlined' }, label: 'Dashboard', tagName: 'router-link', props: {
+    name: 'home', icon: { name: 'home-outlined' }, label: 'Dashboard', tagName: 'router-link', props: {
       to: '/'
     }
   },
   {
-    key: 'about', icon: { name: 'appstore-outlined' }, label: 'About', tagName: 'router-link', props: {
+    name: 'about', icon: { name: 'appstore-outlined' }, label: 'About', tagName: 'router-link', props: {
       to: '/about'
     }
   },
   {
-    key: 'text', icon: { name: 'setting-outlined' }, label: 'Text', tagName: 'router-link', props: {
+    name: 'text', icon: { name: 'setting-outlined' }, label: 'Text', tagName: 'router-link', props: {
       to: '/text'
     }
   },
   {
-    key: 'analysis',
+    name: 'analysis',
     icon: { name: 'home-outlined' },
     label: 'Analysis',
     expanded: true,
     children: [
-      { key: 'pie-chart', icon: { name: 'home-outlined' }, label: 'Pie Chart' },
-      { key: 'stock-chart', label: 'Stock Chart' },
+      { name: 'pie-chart', icon: { name: 'home-outlined' }, label: 'Pie Chart' },
+      { name: 'stock-chart', label: 'Stock Chart' },
       {
-        key: 'column-chart',
+        name: 'column-chart',
         icon: { name: 'home-outlined' },
         label: 'Column chart',
         children: [
-          { key: 'last-year', icon: { name: 'home-outlined' }, label: 'Last years' }
+          { name: 'last-year', icon: { name: 'home-outlined' }, label: 'Last years' }
         ]
       }
     ]
   },
 ])
 
-const defaultActiveKeys = ref(['home'])
+const defaultActiveKeys = ref([])
 
 const leftPanelStore = useLeftPanelMenuStore()
 const { isExpaned } = toRefs(leftPanelStore)
