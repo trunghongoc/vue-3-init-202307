@@ -1,4 +1,4 @@
-import type { IAIconKeybabProps } from '@/components/atoms/ga-icon/typed'
+import type { IAIconKeybabProps } from '@/components/atoms/icons/ga-icon/typed'
 
 export interface IMenuItem {
   key: string
