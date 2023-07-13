@@ -24,8 +24,8 @@ const router = createRouter({
             layout: 'AdminLayout',
             title: 'Dashboard'
           },
-          component: lazy(() => import('@/views/HomeView.vue'))
-          // component: () => import('@/views/HomeView.vue')
+          // component: lazy(() => import('@/views/HomeView.vue'))
+          component: () => import('@/views/HomeView.vue')
         },
         {
           path: 'about',
@@ -37,8 +37,8 @@ const router = createRouter({
           // route level code-splitting
           // this generates a separate chunk (About.[hash].js) for this route
           // which is lazy-loaded when the route is visited.
-          component: lazy(() => import('@/views/AboutView.vue')),
-          // component: () => import('@/views/AboutView.vue'),
+          // component: lazy(() => import('@/views/AboutView.vue')),
+          component: () => import('@/views/AboutView.vue'),
           beforeEnter() {},
           sensitive: true
         }
@@ -55,8 +55,8 @@ const router = createRouter({
             layout: 'BlankLayout',
             title: 'Text'
           },
-          component: lazy(() => import('@/views/ViewText.vue'))
-          // component: () => import('@/views/ViewText.vue')
+          // component: lazy(() => import('@/views/ViewText.vue'))
+          component: () => import('@/views/ViewText.vue')
         }
       ]
     }

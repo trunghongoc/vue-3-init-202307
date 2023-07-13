@@ -12,6 +12,7 @@ import router from './router'
 import '@/scss/index.scss'
 
 import GaIcon from '@/components/atoms/icons/ga-icon/index.vue'
+import LazyComponent from '@/components/molecules/lazy-component/index.vue'
 
 function initMockServer() {
   if (process.env.NODE_ENV === 'development') {
@@ -54,5 +55,6 @@ app.use(antd)
 app.use(VueQueryPlugin)
 
 app.component('ga-icon', GaIcon)
+app.component('lazy-component', LazyComponent)
 
 app.mount('#app')

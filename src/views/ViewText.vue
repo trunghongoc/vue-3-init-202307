@@ -1,18 +1,11 @@
 <template>
-  <h1>Text view</h1>
+  <lazy-component :component="Page" />
 </template>
 
-
 <script setup lang="ts">
-import { ref } from 'vue'
+const Page = () => import('@/pages/Text.vue')
 
 defineOptions({
-  name: 'TextView'
+  name: 'TextPage'
 })
-
-const props = defineProps({
-  text: String
-})
-
-const text1 = ref('TEST TEXT')
 </script>

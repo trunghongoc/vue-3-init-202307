@@ -1,5 +1,5 @@
 <template>
-  <template v-if="isExistTeleportTarget">
+  <template>
     <Teleport :to="targetEle">
       <slot />
     </Teleport>
@@ -48,7 +48,7 @@ const tryToCreateTeleport = () => {
 }
 
 onMounted(() => {
-  tryToCreateTeleport()
+  // tryToCreateTeleport()
 })
 
 </script>
