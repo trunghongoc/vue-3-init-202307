@@ -3,14 +3,14 @@
   <pre>{{ abcdToRefs }}</pre>
   <button @click="changeABC">CHANGE ABC</button>
 
-  <div .some-property="'ahihi'">User:</div>
+  <div>User:</div>
   <pre>{{ user }}</pre>
 
-  <slot name="ahihi"></slot>
+  <slot name="my-slot-custom-name" />
 
   <div>Count: {{ counter.count }}</div>
 
-  <AppText :text="'ahihi do ngoc'" />
+  <AppText :text="'Test App text'" />
 
   <a-button type="primary" @click="fetchTodo">Fetch todos</a-button>
 </template>
@@ -112,7 +112,7 @@ const emit = defineEmits<{
 
 const clicked = () => {
   user.classes.aname = '123'
-  emit('clicked', { ahihi: 'do ngock' })
+  emit('clicked', { sample: 'Sample text' })
 }
 
 defineExpose({
@@ -124,17 +124,6 @@ defineExpose({
 // })
 
 const instance = getCurrentInstance()
-const injected = inject('ahihi')
-
-//     return {
-//       clicked,
-//       _label: abcdToRefs.label,
-//       abcdToRefs,
-//       changeABC,
-//       user,
-//     }
-//   }
-// })
 </script>
 
 <style scoped lang="scss">

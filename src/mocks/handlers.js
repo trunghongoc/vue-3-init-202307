@@ -14,7 +14,10 @@ export const handlers = [
   rest.get('https://jsonplaceholder.typicode.com/todos', (req, res, ctx) => {
     return res(ctx.status(200), ctx.json([1, 2, 3, 4]))
   }),
-  rest.get('https://jsonplaceholder.typicode.com/todos/:id', (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json('ahihi_dongock_res'))
-  })
+  rest.get(
+    'https://jsonplaceholder.typicode.com/todos/:id',
+    (req, res, ctx) => {
+      return res(ctx.status(200), ctx.json('Mock_service_worker_response'))
+    }
+  )
 ]

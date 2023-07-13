@@ -12,7 +12,7 @@ import type { IMenuItem, IMenuProps } from './typed'
 import { loopToCookItems } from './helper'
 
 defineOptions({
-  name: 'AhihiDoNgock',
+  name: 'MenuExpanable',
   inheritAttrs: false,
   customOptions: {}
 })

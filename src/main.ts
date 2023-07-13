@@ -25,9 +25,9 @@ initMockServer()
 
 const app = createApp(App)
 
-app.provide('ahihi', {
-  key: 'ahihi_nek',
-  val_nek: {
+app.provide('app', {
+  key: 'app.key',
+  value: {
     score: 10
   }
 })

@@ -9,7 +9,7 @@ describe('HelloWorld', () => {
     expect(wrapper.text()).toContain('Hello Vitest')
 
     await flushPromises()
-    expect(wrapper.text()).toContain('ahihi_dongock_res')
+    expect(wrapper.text()).toContain('Mock_service_worker_response')
   })
 })
 

@@ -11,8 +11,8 @@
     <button @click="changeLabel">CHANGE LABEL</button>
 
     <Button ref="abc" :label="label" :student="student" @clicked="clickedBtn">
-      <template v-slot:ahihi>
-        yeah slot ahihi
+      <template v-slot:my-slot-custom-name>
+        my-slot-custom-name
       </template>
     </Button>
 
@@ -36,7 +36,7 @@ import PageHeaderTeleport from '@/layout/admin/page-header-teleport/index.vue'
 
 
 const counter = useCounterStore()
-const label = ref<string>('Chao be le dan dat )))')
+const label = ref<string>('Test button label')
 const student = ref<any>({
   name: 'Nguyen Van A',
   age: 20
@@ -55,7 +55,7 @@ const clickedBtn = (emitted: any) => {
 }
 
 const changeLabel = () => {
-  label.value = 'Bé lê dăn đạt đã bị changed )))'
+  label.value = 'test button label changed )))'
 }
 
 const logRef = (value: any) => {

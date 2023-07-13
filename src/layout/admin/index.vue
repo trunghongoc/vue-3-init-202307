@@ -12,7 +12,6 @@
       <div class="body-layout">
         <NavLinkTest />
 
-
         <Suspense timeout="0">
           <template #default>
             <router-view />
