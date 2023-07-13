@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, inject } from 'vue'
+import { ref, onMounted, inject, computed } from 'vue'
 import * as Aicon from '@ant-design/icons-vue'
 
 import { keybabToCamelClass } from '@/utils/keybabToCamel'
@@ -15,7 +15,7 @@ defineOptions({
 })
 
 const props = defineProps<IAIconKeybabProps>()
-const aicon = ref()
+const aicon = ref<any>()
 
 const loadIcon = () => {
   const iconClass = keybabToCamelClass(props.name)
