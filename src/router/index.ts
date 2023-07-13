@@ -60,8 +60,8 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  const { setCurrentRoute } = useRouterStore()
-  setCurrentRoute(to)
+  // const { setCurrentRoute } = useRouterStore()
+  // setCurrentRoute(to)
 })
 
 export default router
