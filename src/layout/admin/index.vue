@@ -12,50 +12,51 @@
       <div class="body-layout">
         <NavLinkTest />
 
+
         <Suspense timeout="0">
           <template #default>
             <router-view />
           </template>
 
           <template #fallback>
-            <div style="width: 2000px; height: 2000px; background: red;">
+            <div style="width: 2000px; height: 2000px; background: yellow;">
               Loading...
             </div>
           </template>
         </Suspense>
 
         <!-- <RouterView v-slot="{ Component }">
-          <template v-if="Component">
-            <Transition mode="out-in">
-              <KeepAlive>
-                <Suspense>
-                  <component :is="Component"></component>
+            <template v-if="Component">
+              <Transition mode="out-in">
+                <KeepAlive>
+                  <Suspense>
+                    <component :is="Component"></component>
 
-                  <template #fallback>
-                    Loading...
-                  </template>
-                </Suspense>
-              </KeepAlive>
-            </Transition>
-          </template>
-        </RouterView> -->
+                    <template #fallback>
+                      Loading...
+                    </template>
+                  </Suspense>
+                </KeepAlive>
+              </Transition>
+            </template>
+          </RouterView> -->
 
         <!-- <RouterView name="default" v-slot="{ Component, route }">
-          <transition :name="route.meta.transition" mode="out-in" :duration="300" :key="route.path">
-            <Suspense>
-              <template #default>
-                <component :is="Component" :key="route.path" />
-              </template>
+            <transition :name="route.meta.transition" mode="out-in" :duration="300" :key="route.path">
+              <Suspense>
+                <template #default>
+                  <component :is="Component" :key="route.path" />
+                </template>
 
-              <template #fallback>
-                <div>
-                  Loading...
-                  <div style="width: 2000px; height: 2000px; background: red;"></div>
-                </div>
-              </template>
-            </Suspense>
-          </transition>
-        </RouterView> -->
+                <template #fallback>
+                  <div>
+                    Loading...
+                    <div style="width: 2000px; height: 2000px; background: red;"></div>
+                  </div>
+                </template>
+              </Suspense>
+            </transition>
+          </RouterView> -->
       </div>
     </div>
   </div>

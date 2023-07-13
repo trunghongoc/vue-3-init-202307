@@ -1,8 +1,21 @@
 <template>
   <div class="dynamic-layout">
-    <component :is="layout">
-      <slot />
-    </component>
+    <router-view v-slot="{ Component }">
+      <component :is="layout">
+        <Suspense timeout="0">
+          <template #default>
+            <component :is="Component" :key="route.path" />
+          </template>
+
+          <template #fallback>
+            <div>
+              Loading...
+              <div style="width: 2000px; height: 2000px; background: red;"></div>
+            </div>
+          </template>
+        </Suspense>
+      </component>
+    </router-view>
   </div>
 </template>
 
