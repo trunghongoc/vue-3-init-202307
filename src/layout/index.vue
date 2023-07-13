@@ -4,7 +4,9 @@
       <component :is="layout">
         <Suspense timeout="0">
           <template #default>
-            <component :is="Component" :key="route.path" />
+            <template v-if="Component">
+              <component :is="Component" :key="route.path" />
+            </template>
           </template>
 
           <template #fallback>
@@ -15,6 +17,7 @@
           </template>
         </Suspense>
       </component>
+
     </router-view>
   </div>
 </template>

@@ -34,6 +34,9 @@ import { ENV } from '@/config/env'
 import HelloWorld from '@/components/HelloWorld.vue';
 import PageHeaderTeleport from '@/layout/admin/page-header-teleport/index.vue'
 
+defineOptions({
+  name: 'HomeView'
+})
 
 const counter = useCounterStore()
 const label = ref<string>('Test button label')
