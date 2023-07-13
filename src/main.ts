@@ -11,6 +11,8 @@ import App from './App.vue'
 import router from './router'
 import '@/scss/index.scss'
 
+import GaIcon from '@/components/atoms/icons/ga-icon/index.vue'
+
 function initMockServer() {
   if (process.env.NODE_ENV === 'development') {
     import('./mocks/browser').then(({ startBrowserMsw }) => {
@@ -50,5 +52,7 @@ app.use(pinia)
 app.use(router)
 app.use(antd)
 app.use(VueQueryPlugin)
+
+app.component('ga-icon', GaIcon)
 
 app.mount('#app')

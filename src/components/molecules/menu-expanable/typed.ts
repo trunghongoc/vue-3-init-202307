@@ -1,8 +1,8 @@
-import type { VueElement } from 'vue'
+import type { IAIconKeybabProps } from '@/components/atoms/ga-icon/typed'
 
 export interface IMenuItem {
   key: string
-  icon?: any
+  icon?: IAIconKeybabProps
   label?: string
   expanded?: boolean
   onClick?: () => void

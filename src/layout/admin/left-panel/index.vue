@@ -55,7 +55,7 @@ const { isExpaned } = toRefs(leftPanelStore)
     overflow-x: hidden;
     overflow-y: auto;
     /* overflow-anchor: none; */
-    overscroll-behavior: contain;
+    /* overscroll-behavior: contain; */
   }
 
   .footer {}
