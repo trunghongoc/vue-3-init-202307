@@ -41,6 +41,21 @@ const router = createRouter({
           component: () => import('@/views/AboutView.vue'),
           beforeEnter() {},
           sensitive: true
+        },
+        {
+          path: 'tsx',
+          name: 'tsx',
+          meta: {
+            layout: 'AdminLayout',
+            title: 'TSX page'
+          },
+          // route level code-splitting
+          // this generates a separate chunk (About.[hash].js) for this route
+          // which is lazy-loaded when the route is visited.
+          // component: lazy(() => import('@/views/AboutView.vue')),
+          component: () => import('@/views/TsxView.tsx'),
+          beforeEnter() {},
+          sensitive: true
         }
       ]
     },

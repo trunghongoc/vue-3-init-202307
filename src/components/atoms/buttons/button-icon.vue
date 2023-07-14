@@ -2,18 +2,26 @@
   <span class="button" :class="[value.size]" :style="{
     background: value.bg,
     color: value.color
-  }">
+  }" v-bind="props">
     <slot />
   </span>
 </template>
 
 <script setup lang="ts">
 import { toRefs, computed } from 'vue'
+import type { DefineComponent } from 'vue'
+
+defineOptions({
+  name: 'ButtonIcon',
+  inheritAttrs: true
+})
 
 const props = defineProps<{
   size?: 'sm' | 'md' | 'lg'
   bg?: string
   color?: string
+} & {
+  onClick?: any
 }>()
 
 const { size, bg, color } = toRefs(props)

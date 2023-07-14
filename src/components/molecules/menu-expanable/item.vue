@@ -102,6 +102,8 @@ onMounted(() => {
 @import '@/scss/variables/color';
 
 .wrapper {
+  margin-bottom: 1px;
+
   .item {
     padding: 8px 0;
     border-radius: 3px;

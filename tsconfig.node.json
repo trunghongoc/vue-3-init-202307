@@ -9,6 +9,8 @@
   ],
   "compilerOptions": {
     "allowJs": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
     "composite": true,
     "module": "ESNext",
     "types": ["node"]

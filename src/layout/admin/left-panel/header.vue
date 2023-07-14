@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="user">
-      <ButtonIcon>
+      <ButtonIcon @click="clickUserIcon">
         <UserOutlined />
       </ButtonIcon>
 
@@ -12,6 +12,7 @@
 
 <script setup lang="ts">
 import { toRefs, watch } from 'vue'
+import { message } from 'ant-design-vue'
 
 import { LeftOutlined, RightOutlined, UserOutlined } from '@ant-design/icons-vue'
 
@@ -20,6 +21,10 @@ import { useLeftPanelMenuStore } from '@/stores/leftPanelMenu'
 
 const leftPanelStore = useLeftPanelMenuStore()
 const { isExpaned } = toRefs(leftPanelStore)
+
+const clickUserIcon = () => {
+  message.info('clicked user icon')
+}
 </script>
 
 <style scoped lang="scss">

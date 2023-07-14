@@ -4,6 +4,8 @@
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
     "allowJs": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
     "composite": true,
     "baseUrl": ".",
     "paths": {
