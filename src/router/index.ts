@@ -6,6 +6,7 @@ import BlankLayout from '@/layout/blank.vue'
 import { Spin } from 'ant-design-vue'
 
 import { useRouterStore } from '@/stores/router'
+import { useAdminLayoutPageLoadingStore } from '@/stores/adminLayoutPageLoading'
 // import { lazy } from '@/utils/lazyLoadComponent'
 
 const lazy = (callback: any) => defineAsyncComponent(callback)
@@ -49,11 +50,18 @@ const router = createRouter({
             layout: 'AdminLayout',
             title: 'TSX page'
           },
-          // route level code-splitting
-          // this generates a separate chunk (About.[hash].js) for this route
-          // which is lazy-loaded when the route is visited.
-          // component: lazy(() => import('@/views/AboutView.vue')),
           component: () => import('@/views/TsxView.tsx'),
+          beforeEnter() {},
+          sensitive: true
+        },
+        {
+          path: 'tsx2',
+          name: 'tsx2',
+          meta: {
+            layout: 'AdminLayout',
+            title: 'TSX 2 page'
+          },
+          component: () => import('@/views/TsxView2.tsx'),
           beforeEnter() {},
           sensitive: true
         }
@@ -79,8 +87,16 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  // const { setCurrentRoute } = useRouterStore()
-  // setCurrentRoute(to)
+  const { setCurrentRoute } = useRouterStore()
+  const adminLayoutPageLoadingStore = useAdminLayoutPageLoadingStore()
+
+  setCurrentRoute(to)
+  adminLayoutPageLoadingStore.setLoading(true)
 })
+
+// router.afterEach(() => {
+//   const adminLayoutPageLoadingStore = useAdminLayoutPageLoadingStore()
+//   adminLayoutPageLoadingStore.setLoading(false)
+// })
 
 export default router

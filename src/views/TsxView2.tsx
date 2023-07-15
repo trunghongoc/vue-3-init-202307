@@ -1,4 +1,4 @@
-import type { SetupContext } from 'vue'
+import type { SetupContext, defineAsyncComponent } from 'vue'
 import { onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import LazyComponent from '@/components/molecules/lazy-component/index.vue'
@@ -16,6 +16,15 @@ export function TsxView(props: any, context: SetupContext<any>) {
 }
 
 TsxView.inheritAttrs = false
-TsxView.displayName = 'TsxPage'
 
-export default TsxView
+export default {
+  name: 'Tsx2',
+  setup() {},
+  render() {
+    return (
+      <div>
+        <LazyComponent component={Page} />
+      </div>
+    )
+  }
+}

@@ -27,20 +27,25 @@
         </div>
       </div>
     </div>
+
+    <LoadingBar v-show="adminLayoutPageLoadingStore.loading" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, toRefs } from 'vue'
+import { computed, toRefs, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useLeftPanelMenuStore } from '@/stores/leftPanelMenu'
 
 import { UserOutlined } from '@ant-design/icons-vue'
 import ButtonIcon from '@/components/atoms/buttons/button-icon.vue'
 
+import LoadingBar from '@/components/atoms/loadings/loading-bar/index.vue'
+import { useAdminLayoutPageLoadingStore } from '@/stores/adminLayoutPageLoading'
 
 const leftPanelStore = useLeftPanelMenuStore()
 const { isExpaned } = toRefs(leftPanelStore)
+const adminLayoutPageLoadingStore = useAdminLayoutPageLoadingStore()
 
 const route = useRoute()
 
@@ -66,11 +71,12 @@ const title = computed(() => {
   box-sizing: border-box;
   border-bottom: 1px solid $border-color;
   background: #fff;
-  padding: 0 16px 0 ($menu-width-collapsed + 16px);
 
   .layout {
     display: flex;
     column-gap: 8px;
+    box-sizing: border-box;
+    padding: 0 16px 0 ($menu-width-collapsed + 16px);
 
     .title {
       display: flex;
@@ -102,7 +108,9 @@ const title = computed(() => {
   }
 
   &.menu-expanded {
-    padding: 0 16px 0 ($menu-width-expaned + 16px);
+    .layout {
+      padding: 0 16px 0 ($menu-width-expaned + 16px);
+    }
   }
 }
 </style>

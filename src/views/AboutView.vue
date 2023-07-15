@@ -1,5 +1,5 @@
 <template>
-  <lazy-component :component="Page" />
+  <lazy-component :component="Page" :isShowSpiner="true" />
 </template>
 
 <script setup lang="ts">

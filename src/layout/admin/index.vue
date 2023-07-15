@@ -18,7 +18,7 @@
           </template>
 
           <template #fallback>
-            <a-spin />
+            <LoadingComponent />
           </template>
         </Suspense>
 
@@ -60,7 +60,7 @@
 </template>
 
 <script setup lang="ts">
-import { toRefs } from 'vue'
+import { toRefs, defineComponent } from 'vue'
 import { useRouterStore } from '@/stores/router'
 import { useRoute } from 'vue-router'
 
@@ -70,6 +70,8 @@ import NavLinkTest from '@/components/molecules/nav-link.vue'
 import PageHeader from './header.vue'
 import LeftPanel from './left-panel/index.vue'
 import { onMounted, watch, toRaw } from 'vue';
+
+import LoadingComponent from './loading-bar.vue'
 
 const leftPanelStore = useLeftPanelMenuStore()
 const { isExpaned } = toRefs(leftPanelStore)

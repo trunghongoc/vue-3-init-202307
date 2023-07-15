@@ -19,7 +19,7 @@ defineOptions({
   name: 'DynamicLayout',
   components: {
     AdminLayout,
-    BlankLayout
+    BlankLayout,
   }
 })
 

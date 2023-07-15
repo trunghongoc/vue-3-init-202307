@@ -30,6 +30,11 @@ const items = ref<IMenuItem[]>([
     }
   },
   {
+    name: 'tsx2', icon: { name: 'gateway-outlined' }, label: 'TSX 2 style', tagName: 'router-link', props: {
+      to: '/tsx2'
+    }
+  },
+  {
     name: 'text', icon: { name: 'setting-outlined' }, label: 'Text', tagName: 'router-link', props: {
       to: '/text'
     }
