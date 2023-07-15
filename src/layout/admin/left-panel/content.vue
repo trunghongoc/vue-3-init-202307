@@ -6,6 +6,7 @@
 
 <script setup lang="ts">
 import { defineComponent, ref, watch, toRefs, onMounted } from 'vue'
+import { message } from 'ant-design-vue'
 import { useRoute } from 'vue-router'
 import { useLeftPanelMenuStore } from '@/stores/leftPanelMenu'
 import Menu from '@/components/molecules/menu-expanable/index.vue'
@@ -45,14 +46,15 @@ const items = ref<IMenuItem[]>([
     label: 'Analysis',
     expanded: true,
     children: [
-      { name: 'pie-chart', icon: { name: 'home-outlined' }, label: 'Pie Chart' },
-      { name: 'stock-chart', label: 'Stock Chart' },
+      { name: 'pie-chart', icon: { name: 'home-outlined' }, label: 'Pie Chart', onClick: () => message.info('clicked Pie Chart') },
+      { name: 'stock-chart', label: 'Stock Chart', onClick: () => message.info('clicked Stock Chart') },
       {
         name: 'column-chart',
         icon: { name: 'home-outlined' },
         label: 'Column chart',
+        onClick: () => message.info('clicked Column chart'),
         children: [
-          { name: 'last-year', icon: { name: 'home-outlined' }, label: 'Last years' }
+          { name: 'last-year', icon: { name: 'home-outlined' }, label: 'Last years', onClick: () => message.info('clicked Last years') },
         ]
       }
     ]

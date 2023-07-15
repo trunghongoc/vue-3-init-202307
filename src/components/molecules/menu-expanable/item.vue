@@ -49,6 +49,10 @@ const expanded = ref(false)
 const menuExpanableContext = inject<any>('menuExpanableContext')
 
 const onClickItem = () => {
+  if (item.value?.onClick) {
+    item.value?.onClick()
+  }
+
   if (item.value?.children) {
     expanded.value = !expanded.value
 
